@@ -3,7 +3,7 @@
 ## BottomNavigationViewEx ##
 An android lib for enhancing BottomNavigationView.
 
-![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg) ![api 9+](https://img.shields.io/badge/API-9%2B-green.svg)
+![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg) ![api 9+](https://img.shields.io/badge/API-16%2B-green.svg)
 
 
 ## <a name="donate">Donator</a> ##
@@ -130,10 +130,9 @@ allprojects {
 
 Step 2. Add the dependency
 
-1. new version support lib = 28
+1. new version AndroidX
 ```groovy
-implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
-implementation "com.android.support:design:28.0.0"
+implementation 'com.github.uiuang:BottomNavigationViewEx:1.0.1'
 ```
 2. AndroidX
 use new version，and add config into gradle.properties
@@ -243,7 +242,7 @@ If you are using ProGuard you might need to add the following option:
 
 ## References ##
 
-The lib is based on `BottomNavigationView` in `Support Library 25 design`.
+The lib is based on `BottomNavigationView` in `AndroidX material`.
 
 I found it was inflexible when I tried the demo. For example, I couldn't change the currently checked item through code. So I wrote a class to extend it to provide some useful methods.
 

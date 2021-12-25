@@ -1,7 +1,7 @@
 ## BottomNavigationViewEx ##
 一个增强BottomNavigationView的安卓库。
 
-![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg) ![api 9+](https://img.shields.io/badge/API-9%2B-green.svg)
+![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg) ![api 9+](https://img.shields.io/badge/API-16%2B-green.svg)
 
 
 
