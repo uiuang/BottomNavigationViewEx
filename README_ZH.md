@@ -3,11 +3,6 @@
 
 ![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg) ![api 9+](https://img.shields.io/badge/API-9%2B-green.svg)
 
-## <a name="donate">捐赠者</a> ##
-
-| 信息 | 金额 |
-|-------|------|
-| [Linsong Wang](https://github.com/wanglinsong) | 100$ |
 
 
 ## 功能 ##
@@ -17,6 +12,7 @@
 |enableAnimation|开启或关闭点击动画(文字放大效果和图片移动效果)。 默认为 true.
 |enableItemShiftingMode|开始或关闭子菜单位移模式。 如果为 true，除了当前选中项，其他项的文本将会隐藏。 当菜单数大于3时，默认为 true。
 |enableShiftingMode|开始或关闭导航条位移模式。如果为 true，选中项和其他项的宽度不一样。当菜单数大于3时，默认为 true。
+|enableOnLongClick|开始或关闭Item长按进行Toast提示。如果为 true，关闭提示。默认为 false。
 |getBottomNavigationItemView|获取位于 position 的私有成员变量 mButton。
 |getBottomNavigationItemViews|获取私有成员变量 mButtons。
 |getCurrentItem|获取当前选中项的索引。
@@ -124,22 +120,17 @@ allprojects {
 	repositories {
 		...
 		maven { url "https://jitpack.io" }
-		maven { url "https://maven.google.com" }
 	}
 }
 ```
 
 步骤 2. 添加依赖
 
-1. 旧版本 support lib 25 或 26
+
+1. 新版本 AndroidX
 ```groovy
-compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
-compile "com.android.support:design:26.+"
-```
-2. 新版本 support lib = 28
-```groovy
-implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
-implementation "com.android.support:design:28.0.0"
+implementation 'com.github.uiuang:BottomNavigationViewEx:1.0.1'
+
 ```
 3. AndroidX
 使用新版本，然后在 gradle.properties 中添加如下配置
@@ -158,7 +149,7 @@ android.enableJetifier=true
 
 在 `xml` 布局中添加自定义控件:
 ```xml
-<com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+<com.uiuang.bottomnavigationviewex.BottomNavigationViewEx
     android:id="@+id/bnve"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -179,6 +170,10 @@ BottomNavigationViewEx bnve = (BottomNavigationViewEx) findViewById(R.id.bnve);
 bnve.enableAnimation(false);
 bnve.enableShiftingMode(false);
 bnve.enableItemShiftingMode(false);
+```
+#### 禁止长按提示 ####
+```java
+bnve.enableOnLongClick(true);
 ```
 
 #### 自定义图标和文本大小 ####
@@ -237,14 +232,6 @@ bind.bnve.setupWithViewPager(bind.vp);
 
 如果你启用了 ProGuard，那你应该加上以下混淆代码:
 
-#### 非 Android X 版本 ####
-```
--keep public class android.support.design.widget.BottomNavigationView { *; }
--keep public class android.support.design.internal.BottomNavigationMenuView { *; }
--keep public class android.support.design.internal.BottomNavigationPresenter { *; }
--keep public class android.support.design.internal.BottomNavigationItemView { *; }
-```
-
 #### Android X 版本 ####
 ```
 -keep public class com.google.android.material.bottomnavigation.BottomNavigationView { *; }
@@ -255,7 +242,7 @@ bind.bnve.setupWithViewPager(bind.vp);
 
 ## 来源 ##
 
-本库修改自安卓官方 `Support Library 25 design` 中的 `BottomNavigationView`。
+本库修改自安卓官方 `AndroidX material` 中的 `BottomNavigationView`。
 
 我在尝试使用官方的库时，发现缺少灵活性。比如官方并没有提供切换当前选中项的方法。所以我在此基础上包装了一层，对外公开了一些方法。
 
@@ -268,36 +255,9 @@ bind.bnve.setupWithViewPager(bind.vp);
 
 ## 授权 ##
 
-	MIT License
-	
-	Copyright (c) 2017 ittianyu
-	
-	Permission is hereby granted, free of charge, to any person obtaining a copy
-	of this software and associated documentation files (the "Software"), to deal
-	in the Software without restriction, including without limitation the rights
-	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
-	
-	The above copyright notice and this permission notice shall be included in all
-	copies or substantial portions of the Software.
-	
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-	SOFTWARE.
-
-## 反馈 ##
-
-qq群:913494600
 
 
-## 打赏 ##
 
-paypal: admin@ittianyu.com
 
-![](/read_me_images/donate_alipay.png) ![](/read_me_images/donate_wechat.png)
+
 

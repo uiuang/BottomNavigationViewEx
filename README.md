@@ -8,9 +8,6 @@ An android lib for enhancing BottomNavigationView.
 
 ## <a name="donate">Donator</a> ##
 
-| Info | Amount |
-|-------|------|
-| [Linsong Wang](https://github.com/wanglinsong) | 100$ |
 
 
 ## Features ##
@@ -127,23 +124,18 @@ allprojects {
 	repositories {
 		...
 		maven { url "https://jitpack.io" }
-		maven { url "https://maven.google.com" }
 	}
 }
 ```
 
 Step 2. Add the dependency
-1. old version support lib is 25 or 26
-```groovy
-compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
-compile "com.android.support:design:26.+"
-```
-2. new version support lib = 28
+
+1. new version support lib = 28
 ```groovy
 implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
 implementation "com.android.support:design:28.0.0"
 ```
-3. AndroidX
+2. AndroidX
 use new version，and add config into gradle.properties
 ```
 android.useAndroidX=true
@@ -159,7 +151,7 @@ Downloading [BottomNavigationViewEx.java](https://raw.githubusercontent.com/itti
 
 Adding a custom widget in `xml` :
 ```xml
-<com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+<com.uiuang.bottomnavigationviewex.BottomNavigationViewEx
     android:id="@+id/bnve"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -180,6 +172,11 @@ BottomNavigationViewEx bnve = (BottomNavigationViewEx) findViewById(R.id.bnve);
 bnve.enableAnimation(false);
 bnve.enableShiftingMode(false);
 bnve.enableItemShiftingMode(false);
+```
+
+#### Disable all Long Click toast tips  ####
+```java
+bnve.enableOnLongClick(true);
 ```
 
 #### Custom text and icon size ####
@@ -236,14 +233,6 @@ You can [click here](https://developer.android.com/reference/android/support/des
 
 If you are using ProGuard you might need to add the following option:
 
-#### None Android X ####
-```
--keep public class android.support.design.widget.BottomNavigationView { *; }
--keep public class android.support.design.internal.BottomNavigationMenuView { *; }
--keep public class android.support.design.internal.BottomNavigationPresenter { *; }
--keep public class android.support.design.internal.BottomNavigationItemView { *; }
-```
-
 #### Android X ####
 ```
 -keep public class com.google.android.material.bottomnavigation.BottomNavigationView { *; }
@@ -265,33 +254,5 @@ You have no need to worry about stability, because I minimised the modifications
 Thanks to [Adrián Mouly](https://github.com/amouly) | [liaolintao](https://github.com/liaolintao) | [Luong Vo](https://github.com/luongvo).
 
 
-## License ##
 
-	MIT License
-	
-	Copyright (c) 2017 ittianyu
-	
-	Permission is hereby granted, free of charge, to any person obtaining a copy
-	of this software and associated documentation files (the "Software"), to deal
-	in the Software without restriction, including without limitation the rights
-	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
-	
-	The above copyright notice and this permission notice shall be included in all
-	copies or substantial portions of the Software.
-	
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-	SOFTWARE.
-
-## Donate ##
-
-**paypal: admin@ittianyu.com**
-
-![](/read_me_images/donate_alipay.png) ![](/read_me_images/donate_wechat.png)
 

@@ -54,6 +54,8 @@ public class BottomNavigationViewInner extends BottomNavigationView {
 
     // detect navigation tab changes when the user clicking on navigation item
     private static boolean isNavigationItemClicking = false;
+    private BottomNavigationViewExOnPageChangeCallback onPageChangeCallback;
+    private MyOnNavigationItemSelectedListener mMy2OnNavigationItemSelectedListener;
 
     public BottomNavigationViewInner(Context context) {
         this(context, null);
@@ -781,6 +783,37 @@ public class BottomNavigationViewInner extends BottomNavigationView {
         return setupWithViewPager(viewPager, false);
     }
 
+//    public BottomNavigationViewInner setupWithViewPager2(final ViewPager2 viewPager) {
+//        return setupWithViewPager2(viewPager, false);
+//    }
+
+    public BottomNavigationViewInner setupWithViewPager2(final ViewPager2 viewPager2, boolean smoothScroll) {
+        if (mViewPager2 != null) {
+            // If we've already been setup with a ViewPager, remove us from it
+            if (onPageChangeCallback != null) {
+                mViewPager2.unregisterOnPageChangeCallback(onPageChangeCallback);
+            }
+        }
+
+        if (null == viewPager2) {
+            mViewPager = null;
+            super.setOnNavigationItemSelectedListener(null);
+            return this;
+        }
+
+        mViewPager2 = viewPager2;
+        if (onPageChangeCallback == null) {
+            onPageChangeCallback = new BottomNavigationViewExOnPageChangeCallback(this);
+        }
+        viewPager2.registerOnPageChangeCallback(onPageChangeCallback);
+
+        // Now we'll add a navigation item selected listener to set ViewPager's current item
+        OnNavigationItemSelectedListener listener = getOnNavigationItemSelectedListener();
+//        mMyOnNavigationItemSelectedListener = new MyOnNavigationItemSelectedListener(viewPager, this, smoothScroll, listener);
+        super.setOnNavigationItemSelectedListener(mMyOnNavigationItemSelectedListener);
+        return this;
+    }
+
     /**
      * This method will link the given ViewPager and this BottomNavigationViewInner together so that
      * changes in one are automatically reflected in the other. This includes scroll state changes
@@ -809,6 +842,7 @@ public class BottomNavigationViewInner extends BottomNavigationView {
         if (mPageChangeListener == null) {
             mPageChangeListener = new BottomNavigationViewExOnPageChangeListener(this);
         }
+
         viewPager.addOnPageChangeListener(mPageChangeListener);
 
         // Now we'll add a navigation item selected listener to set ViewPager's current item
@@ -853,6 +887,30 @@ public class BottomNavigationViewInner extends BottomNavigationView {
         }
     }
 
+    private static class BottomNavigationViewExOnPageChangeCallback extends ViewPager2.OnPageChangeCallback {
+        private final WeakReference<BottomNavigationViewInner> mBnveRef;
+
+        public BottomNavigationViewExOnPageChangeCallback(BottomNavigationViewInner bnve) {
+            mBnveRef = new WeakReference<>(bnve);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(final int state) {
+        }
+
+        @Override
+        public void onPageScrolled(final int position, final float positionOffset,
+                                   final int positionOffsetPixels) {
+        }
+
+        @Override
+        public void onPageSelected(final int position) {
+            final BottomNavigationViewInner bnve = mBnveRef.get();
+            if (null != bnve && !isNavigationItemClicking)
+                bnve.setCurrentItem(position);
+//            Log.d("onPageSelected", "--------- position " + position + " ------------");
+        }
+    }
     /**
      * Decorate OnNavigationItemSelectedListener for setupWithViewPager
      */
@@ -878,6 +936,8 @@ public class BottomNavigationViewInner extends BottomNavigationView {
                 items.put(itemId, i);
             }
         }
+
+
 
         public void setOnNavigationItemSelectedListener(OnNavigationItemSelectedListener listener) {
             this.listener = listener;
@@ -916,6 +976,8 @@ public class BottomNavigationViewInner extends BottomNavigationView {
         }
 
     }
+
+
 
     public BottomNavigationViewInner enableShiftingMode(int position, boolean enable) {
         getBottomNavigationItemView(position).setShifting(enable);
