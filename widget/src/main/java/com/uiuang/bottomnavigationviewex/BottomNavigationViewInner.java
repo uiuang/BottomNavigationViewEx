@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.TintTypedArray;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.R;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
@@ -44,6 +45,7 @@ public class BottomNavigationViewInner extends BottomNavigationView {
 
     // used for setupWithViewPager
     private ViewPager mViewPager;
+    private ViewPager2 mViewPager2;
     private MyOnNavigationItemSelectedListener mMyOnNavigationItemSelectedListener;
     private BottomNavigationViewExOnPageChangeListener mPageChangeListener;
     private BottomNavigationMenuView mMenuView;
@@ -141,6 +143,7 @@ public class BottomNavigationViewInner extends BottomNavigationView {
         mMenuView.updateMenuView();
         return this;
     }
+
 
     /**
      * change the visibility of text
@@ -919,8 +922,31 @@ public class BottomNavigationViewInner extends BottomNavigationView {
         return this;
     }
 
+
+
+    /**
+     * 可以关闭长按toast提示
+     * @param check
+     * @return
+     */
+    public BottomNavigationViewInner enableOnLongClick( boolean check) {
+        BottomNavigationMenuView mMenuView = getBottomNavigationMenuView();
+        BottomNavigationItemView[] bottomNavigationItemViews = getBottomNavigationItemViews();
+        for (BottomNavigationItemView bottomNavigationItemView : bottomNavigationItemViews) {
+            bottomNavigationItemView.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return check;
+                }
+            });
+        }
+        mMenuView.updateMenuView();
+        return this;
+    }
+
     public BottomNavigationViewInner setItemBackground(int position, int background) {
         getBottomNavigationItemView(position).setItemBackground(background);
+
         return this;
     }
 

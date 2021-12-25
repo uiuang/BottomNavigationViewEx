@@ -302,6 +302,15 @@ public class BottomNavigationViewEx extends BottomNavigationViewInner {
     }
 
     @Override
+    public BottomNavigationViewInner enableOnLongClick(boolean check) {
+        try {
+            return super.enableOnLongClick( check);
+        } catch (Exception e) {
+            return this;
+        }
+    }
+
+    @Override
     public BottomNavigationViewInner setItemBackground(int position, int background) {
         try {
             return super.setItemBackground(position, background);

@@ -1,5 +1,6 @@
 package com.uiuang.bottomnavigationviewexsample.features.centerfab;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,6 +15,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.badge.BadgeUtils;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.uiuang.bottomnavigationviewexsample.R;
 import com.uiuang.bottomnavigationviewexsample.common.base.BaseFragment;
@@ -84,6 +88,7 @@ public class CenterFabActivity extends AppCompatActivity {
     /**
      * change BottomNavigationViewEx style
      */
+    @SuppressLint("UnsafeExperimentalUsageError")
     private void initView() {
         bind.bnve.enableItemShiftingMode(false);
         bind.bnve.enableShiftingMode(false);
